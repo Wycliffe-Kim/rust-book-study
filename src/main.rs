@@ -27,7 +27,13 @@ fn main() {
             .expect("Failed to read line");
         println!("You guessed: {guess}");
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Please input a number.");
+                continue;
+            }
+        };
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
