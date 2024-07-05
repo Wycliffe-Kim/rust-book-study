@@ -8,40 +8,12 @@
  * Email: contact@nota.ai
  */
 
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    ChangeColor(i32, i32, i32),
-}
-
 fn main() {
-    println!("Please input a number: ");
-    let mut input = String::new();
-    match std::io::stdin().read_line(&mut input) {
-        Ok(_) => {}
-        Err(e) => {
-            println!("Error: {}", e);
-            return;
-        }
-    };
-    println!("input: {}", input);
+    let x: i8 = 5;
+    let y: Option<i8> = Some(5);
+    let z: Option<i8> = None;
 
-    let input_number: i32 = input.trim().parse().unwrap_or(0);
-    let message = if input_number == 0 {
-        Message::Move { x: 1, y: 2 }
-    } else if input_number == 1 {
-        Message::Write(input)
-    } else if input_number == 2 {
-        Message::ChangeColor(1, 2, 3)
-    } else {
-        Message::Quit
-    };
+    let sum = x + y.unwrap_or(0) + z.unwrap_or(0);
 
-    match message {
-        Message::Quit => println!("Quit"),
-        Message::Move { x, y } => println!("Move x: {}, y: {}", x, y),
-        Message::Write(s) => println!("Write: {}", s),
-        Message::ChangeColor(r, g, b) => println!("ChangeColor r: {}, g: {}, b: {}", r, g, b),
-    }
+    println!("sum: {}", sum);
 }
