@@ -77,7 +77,44 @@ fn plus_one_example() {
     println!("none = {:?}", none.unwrap_or(0));
 }
 
+fn dice_roll_example() {
+    use rand::Rng;
+
+    println!("----- dice_roll_example -----");
+
+    println!("----- _ 사용함 -----");
+    for _ in 0..5 {
+        let dice_roll = rand::thread_rng().gen_range(1..=10);
+        print!("{} ", dice_roll);
+        match dice_roll {
+            1 => println!("You rolled a 1!"),
+            2 => println!("You rolled a 2!"),
+            3 => println!("You rolled a 3!"),
+            4 => println!("You rolled a 4!"),
+            5 => println!("You rolled a 5!"),
+            6 => println!("You rolled a 6!"),
+            _ => println!("You rolled a number that is not 1-6!"),
+        }
+    }
+
+    println!("----- _ 사용안함 -----");
+    for _ in 0..5 {
+        let dice_roll = rand::thread_rng().gen_range(1..=10);
+        print!("{} ", dice_roll);
+        match dice_roll {
+            1 => println!("You rolled a 1!"),
+            2 => println!("You rolled a 2!"),
+            3 => println!("You rolled a 3!"),
+            4 => println!("You rolled a 4!"),
+            5 => println!("You rolled a 5!"),
+            6 => println!("You rolled a 6!"),
+            other => println!("You rolled a number that is not 1-6! ({})", other),
+        }
+    }
+}
+
 fn main() {
     coin_example();
     plus_one_example();
+    dice_roll_example();
 }
