@@ -12,8 +12,10 @@ fn main() {
     let mut s1 = String::from("hello");
     println!("The length of '{s1}' before changing is {}.", s1.len());
 
-    let len = calculate_length(&mut s1);
-    println!("The length of '{s1}' is {len}.");
+    let r1 = &mut s1;
+    let r2 = &mut s1;
+
+    println!("{}, {}", r1, r2);
 }
 
 fn calculate_length(s: &mut String) -> usize {
