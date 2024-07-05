@@ -19,8 +19,20 @@ impl Rectangle {
         self.width * self.height
     }
 
-    fn debug(&self) {
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    fn debug(&self) -> &Self {
         dbg!(&self);
+        self
+    }
+
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
     }
 }
 
@@ -36,4 +48,22 @@ fn main() {
     );
 
     rect1.debug();
+
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+
+    let area_of_square = Rectangle::square(10).debug().area();
+    println!(
+        "The area of the square is {} square pixels.",
+        area_of_square
+    );
 }
