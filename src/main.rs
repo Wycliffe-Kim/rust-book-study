@@ -10,7 +10,12 @@
 
 fn main() {
     let s1 = String::from("hello");
-    let s2 = s1;
 
-    println!("{}, world!", s2);
+    takes_ownership(s1);
+
+    // println!("{}, world!", s1);
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
 }
