@@ -16,7 +16,7 @@ struct Rectangle {
 
 fn main() {
     let rect1 = Rectangle {
-        width: 30,
+        width: dbg!(30 * 2),
         height: 50,
     };
 
@@ -26,6 +26,7 @@ fn main() {
     );
 
     println!("rect1 is {:#?}", rect1);
+    dbg!(&rect1);
 }
 
 fn area(rectangle: &Rectangle) -> u32 {
