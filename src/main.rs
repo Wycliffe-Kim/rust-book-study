@@ -57,6 +57,27 @@ fn coin_example() {
     );
 }
 
+fn plus_one_example() {
+    fn plus_one(x: Option<i32>) -> Option<i32> {
+        match x {
+            None => None,
+            Some(i) => Some(i + 1),
+        }
+    }
+
+    println!("----- plus_one_example -----");
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+    println!("five = {:?}", five);
+    println!("six = {:?}", six);
+    println!("none = {:?}", none);
+    println!("five = {:?}", five.unwrap_or(0));
+    println!("six = {:?}", six.unwrap_or(0));
+    println!("none = {:?}", none.unwrap_or(0));
+}
+
 fn main() {
     coin_example();
+    plus_one_example();
 }
