@@ -9,14 +9,14 @@
  */
 
 fn main() {
-    let s1 = String::from("hello");
+    let mut s1 = String::from("hello");
+    println!("The length of '{s1}' before changing is {}.", s1.len());
 
-    let len = calculate_length(&s1);
-
+    let len = calculate_length(&mut s1);
     println!("The length of '{s1}' is {len}.");
 }
 
-fn calculate_length(s: &String) -> usize {
+fn calculate_length(s: &mut String) -> usize {
     s.push_str("world");
     s.len()
 }
