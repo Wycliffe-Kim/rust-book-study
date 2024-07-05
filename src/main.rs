@@ -17,5 +17,6 @@ fn main() {
 }
 
 fn calculate_length(s: &String) -> usize {
+    s.push_str("world");
     s.len()
 }
