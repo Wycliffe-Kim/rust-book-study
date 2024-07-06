@@ -8,9 +8,10 @@
  * Email: contact@nota.ai
  */
 
-pub mod hosting {
+mod hosting {
     pub fn add_to_waitlist(value: i32) {
-        println!("add_to_waitlist - ({value})");
+        super::print_str("add_to_waitlist");
+        println!("{value}");
     }
 }
 
@@ -20,4 +21,8 @@ pub fn eat_at_restaurant() {
 
     // Relative path
     hosting::add_to_waitlist(2);
+}
+
+fn print_str(str: &str) {
+    println!("{}", str);
 }
