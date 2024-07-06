@@ -8,8 +8,34 @@
  * Email: contact@nota.ai
  */
 
-fn main() {
-    let v = vec![1, 2, 3, 4, 5];
+fn test(value: i32) -> Result<i32, i32> {
+    match Some(value) {
+        Some(1) => Ok(1),
+        Some(2) => Ok(2),
+        Some(3) => Ok(3),
+        other => Err(other.unwrap_or(0)),
+    }
+}
 
-    println!("{}", v[99]);
+fn enter_input(input: &mut String) {
+    match std::io::stdin().read_line(input) {
+        Ok(_) => (),
+        Err(e) => {
+            println!("Error: {:?}", e);
+            enter_input(input);
+        }
+    }
+}
+
+fn main() {
+    let mut input = String::new();
+    println!("Enter a number: ");
+    enter_input(&mut input);
+
+    let value: i32 = input.trim().parse().unwrap_or(0);
+
+    match test(value) {
+        Ok(result) => println!("Result: {}", result),
+        Err(other) => println!("Error: {} is big!", other),
+    }
 }
