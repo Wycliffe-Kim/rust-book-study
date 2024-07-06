@@ -7,14 +7,4 @@
  * For inquiries regarding the use of this source code, please contact Nota Inc. at:
  * Email: contact@nota.ai
  */
-
-use crate::garden::vegetables::Asparagus;
-
-pub mod garden;
-
-fn main() {
-    println!("----- example 1 -----");
-    let plant = Asparagus {};
-
-    println!("I'm growing {plant:?}!");
-}
+pub mod vegetables;

@@ -8,13 +8,5 @@
  * Email: contact@nota.ai
  */
 
-use crate::garden::vegetables::Asparagus;
-
-pub mod garden;
-
-fn main() {
-    println!("----- example 1 -----");
-    let plant = Asparagus {};
-
-    println!("I'm growing {plant:?}!");
-}
+#[derive(Debug)]
+pub struct Asparagus {}
