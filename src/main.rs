@@ -13,12 +13,26 @@ pub mod summary;
 pub mod tweet;
 
 fn main() {
-    println!(
-        "news article: {}",
-        summary::new(summary::SummaryType::NewsArticle).summarize()
-    );
-    println!(
-        "tweet: {}",
-        summary::new(summary::SummaryType::Tweet).summarize()
-    );
+    let news_article = summary::new(summary::SummaryType::NewsArticle);
+    let tweet = summary::new(summary::SummaryType::Tweet);
+    println!("news article: {}", news_article.summarize());
+    println!("tweet: {}", tweet.summarize());
+
+    summary::notify(&news_article);
+    summary::notify(&tweet);
+
+    summary::notify2(&news_article::NewsArticle {
+        headline: String::from("Penguins win the Stanley Cup Championship!"),
+        location: String::from("Pittsburgh, PA, USA"),
+        author: String::from("Iceburgh"),
+        content: String::from(
+            "The Pittsburgh Penguins once again are the best hockey team in the NHL.",
+        ),
+    });
+    summary::notify2(&tweet::Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people"),
+        reply: false,
+        retweet: false,
+    });
 }
