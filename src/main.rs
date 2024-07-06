@@ -8,34 +8,18 @@
  * Email: contact@nota.ai
  */
 
-fn test(value: i32) -> Result<i32, i32> {
-    match Some(value) {
-        Some(1) => Ok(1),
-        Some(2) => Ok(2),
-        Some(3) => Ok(3),
-        other => Err(other.unwrap_or(0)),
-    }
-}
-
-fn enter_input(input: &mut String) {
-    match std::io::stdin().read_line(input) {
-        Ok(_) => (),
-        Err(e) => {
-            println!("Error: {:?}", e);
-            enter_input(input);
-        }
-    }
-}
+use std::fs::File;
 
 fn main() {
-    let mut input = String::new();
-    println!("Enter a number: ");
-    enter_input(&mut input);
+    let greeting_file = File::open("hello.txt").unwrap_or_else(|error| {
+        if error.kind() == std::io::ErrorKind::NotFound {
+            File::create("hello.txt").unwrap_or_else(|error| {
+                panic!("Problem creating the file: {:?}", error);
+            })
+        } else {
+            panic!("Problem opening the file: {:?}", error);
+        }
+    });
 
-    let value: i32 = input.trim().parse().unwrap_or(0);
-
-    match test(value) {
-        Ok(result) => println!("Result: {}", result),
-        Err(other) => println!("Error: {} is big!", other),
-    }
+    println!("{:?}", greeting_file);
 }
