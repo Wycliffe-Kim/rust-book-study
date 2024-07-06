@@ -8,8 +8,12 @@
  * Email: contact@nota.ai
  */
 
-use std::fs::File;
+fn last_char_of_first_line(text: &str) -> Option<char> {
+    text.lines().next()?.chars().last()
+}
 
 fn main() {
-    let greeting_file = File::open("hello.txt")?;
+    let text = "hello\nworld";
+    let result = last_char_of_first_line(text);
+    println!("{:?}", result);
 }
