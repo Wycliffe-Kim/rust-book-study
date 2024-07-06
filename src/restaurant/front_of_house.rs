@@ -7,17 +7,17 @@
  * For inquiries regarding the use of this source code, please contact Nota Inc. at:
  * Email: contact@nota.ai
  */
-pub mod garden;
-pub mod restaurant;
 
-use crate::garden::vegetables::Asparagus;
+pub mod hosting {
+    pub fn add_to_waitlist(value: i32) {
+        println!("add_to_waitlist - ({value})");
+    }
+}
 
-fn main() {
-    println!("----- example 1 -----");
-    let plant = Asparagus {};
+pub fn eat_at_restaurant() {
+    // Absolute path
+    crate::restaurant::front_of_house::hosting::add_to_waitlist(1);
 
-    println!("I'm growing {plant:?}!");
-
-    println!("----- example 2 -----");
-    restaurant::front_of_house::eat_at_restaurant();
+    // Relative path
+    hosting::add_to_waitlist(2);
 }
