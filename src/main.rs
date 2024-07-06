@@ -13,10 +13,19 @@ struct Point<T> {
     y: T,
 }
 
+impl Point<f64> {
+    fn distance_from_origin(&self) -> f64 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+
 fn main() {
     let integer = Point { x: 5, y: 10 };
     let float = Point { x: 1.0, y: 4.0 };
 
     println!("integer.x = {}, integer.y = {}", integer.x, integer.y);
     println!("float.x = {}, float.y = {}", float.x, float.y);
+
+    let dist = float.distance_from_origin();
+    println!("distance from origin: {}", dist);
 }
