@@ -9,16 +9,11 @@
  */
 
 fn main() {
-    let mut v: Vec<i32> = Vec::from([1, 2, 3, 4]);
-    let first = v[0];
-    println!("The first element is: {}", first);
-    println!("vector: {:?}", v);
-    v[0] = 5;
+    let s1 = String::from("Hello, ");
+    let s2 = String::from("world!");
+    let s3 = s1 + &s2; // note s1 has been moved here and can no longer be used
 
-    println!("The first element is: {}", first);
-
-    match v.get(5) {
-        Some(v) => println!("Item exists. {v}"),
-        None => println!("Item does not exist"),
-    }
+    // println!("{}", s1);
+    println!("{}", s2);
+    println!("{}", s3);
 }
