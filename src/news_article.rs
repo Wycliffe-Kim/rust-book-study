@@ -8,17 +8,17 @@
  * Email: contact@nota.ai
  */
 
-pub mod news_article;
-pub mod summary;
-pub mod tweet;
+use crate::summary::Summary;
 
-fn main() {
-    println!(
-        "news article: {}",
-        summary::new(summary::SummaryType::NewsArticle).summarize()
-    );
-    println!(
-        "tweet: {}",
-        summary::new(summary::SummaryType::Tweet).summarize()
-    );
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
 }

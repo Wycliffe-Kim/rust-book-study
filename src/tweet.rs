@@ -8,17 +8,17 @@
  * Email: contact@nota.ai
  */
 
-pub mod news_article;
-pub mod summary;
-pub mod tweet;
+use crate::summary::Summary;
 
-fn main() {
-    println!(
-        "news article: {}",
-        summary::new(summary::SummaryType::NewsArticle).summarize()
-    );
-    println!(
-        "tweet: {}",
-        summary::new(summary::SummaryType::Tweet).summarize()
-    );
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
 }

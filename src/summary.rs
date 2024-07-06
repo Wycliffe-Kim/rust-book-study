@@ -8,17 +8,32 @@
  * Email: contact@nota.ai
  */
 
-pub mod news_article;
-pub mod summary;
-pub mod tweet;
+use crate::{news_article::NewsArticle, tweet::Tweet};
 
-fn main() {
-    println!(
-        "news article: {}",
-        summary::new(summary::SummaryType::NewsArticle).summarize()
-    );
-    println!(
-        "tweet: {}",
-        summary::new(summary::SummaryType::Tweet).summarize()
-    );
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+pub enum SummaryType {
+    NewsArticle,
+    Tweet,
+}
+
+pub fn new(summary_type: SummaryType) -> Box<dyn Summary> {
+    match summary_type {
+        SummaryType::NewsArticle => Box::new(NewsArticle {
+            headline: String::from("Penguins win the Stanley Cup Championship!"),
+            location: String::from("Pittsburgh, PA, USA"),
+            author: String::from("Iceburgh"),
+            content: String::from(
+                "The Pittsburgh Penguins once again are the best hockey team in the NHL.",
+            ),
+        }),
+        SummaryType::Tweet => Box::new(Tweet {
+            username: String::from("horse_ebooks"),
+            content: String::from("of course, as you probably already know, people"),
+            reply: false,
+            retweet: false,
+        }),
+    }
 }
