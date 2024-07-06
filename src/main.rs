@@ -10,17 +10,12 @@
 
 use std::collections::HashMap;
 
-fn insert(key: &String, value: &String) {
-    let mut map = HashMap::new();
-    map.insert(key, value);
-
-    println!("{key} = {value}");
-}
-
 fn main() {
-    let field_name = String::from("Favorite color");
-    let field_value = String::from("Blue");
-    insert(&field_name, &field_value);
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
 
-    println!("{field_name} = {field_value}");
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+
+    println!("{scores:?}");
 }
