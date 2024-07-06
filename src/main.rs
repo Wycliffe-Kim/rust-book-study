@@ -19,5 +19,5 @@ fn main() {
     println!("I'm growing {plant:?}!");
 
     println!("----- example 2 -----");
-    restaurant::front_of_house::eat_at_restaurant();
+    restaurant::eat_at_restaurant();
 }

@@ -7,14 +7,17 @@
  * For inquiries regarding the use of this source code, please contact Nota Inc. at:
  * Email: contact@nota.ai
  */
-
-pub mod hosting {
-    pub fn add_to_waitlist(value: i32) {
-        super::print_str("add_to_waitlist");
-        println!("{value}");
-    }
+#[derive(Debug)]
+pub struct Breakfast {
+    pub toast: String,
+    seasonal_fruit: String,
 }
 
-fn print_str(str: &str) {
-    println!("{}", str);
+impl Breakfast {
+    pub fn summer(toast: &str) -> Breakfast {
+        Breakfast {
+            toast: String::from(toast),
+            seasonal_fruit: String::from("peaches"),
+        }
+    }
 }
