@@ -8,8 +8,20 @@
  * Email: contact@nota.ai
  */
 
-fn main() {
-    let s1 = String::from("Hello, ");
+use std::collections::HashMap;
 
-    println!("{:?}", s1.get(0..1))
+fn main() {
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    println!("{:?}", scores);
+
+    let score = scores.get("Blue").copied().unwrap_or(0);
+    println!("{}", score);
+
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
 }
