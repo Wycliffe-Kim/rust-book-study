@@ -8,13 +8,27 @@
  * Email: contact@nota.ai
  */
 
-pub mod adder;
-pub mod greeting;
-pub mod rectangle;
+pub fn greeting(name: &str) -> String {
+    format!("Hello, {name}!")
+}
 
-fn main() {
-    println!("Hello, world!");
+#[cfg(test)]
+mod test {
+    use super::*;
 
-    let rect = rectangle::Rectangle::new(30, 50);
-    println!("rect is {:?}", rect);
+    #[test]
+    fn greeting_contains_name() {
+        let result = greeting("Carol");
+        assert!(
+            result.contains("Carol"),
+            "Greeting did not contain name, value was `{}`",
+            result
+        );
+        let result = greeting("Alice");
+        assert!(
+            result.contains("Carol"),
+            "Greeting did not contain name, value was `{}`",
+            result
+        );
+    }
 }
