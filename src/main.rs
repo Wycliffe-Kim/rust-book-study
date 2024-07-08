@@ -20,9 +20,9 @@ fn main() {
     let result;
     let string1 = String::from("long");
     {
-        let string2 = "long1dsfafasfs"; // 이 경우는 스택에 할당되어서 result에서 확인할 수 있음.
+        let string2 = String::from("long1dsfafasfs"); // 이 경우는 힙에 할당되어서 result에서 확인할 수 없음.
 
-        result = longest(string1.as_str(), string2);
+        result = longest(string1.as_str(), string2.as_str());
     }
     println!("The longest string is {}", result);
 }
