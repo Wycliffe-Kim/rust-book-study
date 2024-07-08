@@ -17,9 +17,12 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 
 fn main() {
-    let string1 = String::from("xyz");
-    let string2 = "xyz";
+    let result;
+    let string1 = String::from("long");
+    {
+        let string2 = "long1dsfafasfs"; // 이 경우는 스택에 할당되어서 result에서 확인할 수 있음.
 
-    let result = longest(string1.as_str(), string2);
+        result = longest(string1.as_str(), string2);
+    }
     println!("The longest string is {}", result);
 }
