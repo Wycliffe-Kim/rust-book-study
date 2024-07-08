@@ -8,12 +8,18 @@
  * Email: contact@nota.ai
  */
 
-pub mod adder;
-pub mod rectangle;
-pub mod test;
+#[derive(Debug)]
+pub struct Rectangle {
+    width: u32,
+    height: u32,
+}
 
-fn main() {
-    println!("Hello, world!");
+impl Rectangle {
+    pub fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
 
-    let rect = rectangle::Rectangle::new(30, 50);
+    pub fn new(width: u32, height: u32) -> Rectangle {
+        Rectangle { width, height }
+    }
 }

@@ -8,12 +8,13 @@
  * Email: contact@nota.ai
  */
 
-pub mod adder;
-pub mod rectangle;
-pub mod test;
+#[cfg(test)]
+pub mod tests {
+    use crate::{adder, rectangle::Rectangle};
 
-fn main() {
-    println!("Hello, world!");
-
-    let rect = rectangle::Rectangle::new(30, 50);
+    #[test]
+    fn exploration() {
+        let result = adder::add(2, 2);
+        assert_eq!(result, 4);
+    }
 }
