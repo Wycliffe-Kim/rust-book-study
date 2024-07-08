@@ -10,10 +10,10 @@
 
 pub mod adder;
 pub mod rectangle;
-pub mod test;
 
 fn main() {
     println!("Hello, world!");
 
     let rect = rectangle::Rectangle::new(30, 50);
+    println!("rect is {:?}", rect);
 }
