@@ -19,6 +19,7 @@ fn main() {
         let val = String::from("hi");
         sleep(Duration::from_secs(1));
         tx.send(val).unwrap();
+        println!("val is {}", val);
     });
 
     let received = rx.recv().unwrap();
