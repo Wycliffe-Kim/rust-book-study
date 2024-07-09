@@ -16,12 +16,18 @@ fn main() {
     let (tx, rx) = mpsc::channel();
 
     thread::spawn(move || {
-        let val = String::from("hi");
-        sleep(Duration::from_secs(1));
-        tx.send(val).unwrap();
-        println!("val is {}", val);
+        let vals = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
+
+        vals.into_iter().for_each(|val| {
+            sleep(Duration::from_secs(1));
+            tx.send(val).unwrap()
+        });
     });
 
-    let received = rx.recv().unwrap();
-    println!("Got: {}", received);
+    rx.into_iter().for_each(|val| println!("Got: {}", val));
 }
