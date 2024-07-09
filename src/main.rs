@@ -8,13 +8,28 @@
  * Email: contact@nota.ai
  */
 
-use std::thread;
+fn get_closure_with_string(value: String) -> impl FnOnce() -> String {
+    move || value
+}
+
+fn get_closure_with_i32(value: i32) -> impl FnOnce() -> i32 {
+    move || value
+}
 
 fn main() {
-    let list = vec![1, 2, 3];
-    println!("Before defining closure: {list:?}");
-
-    thread::spawn(move || println!("From thread: {list:?}"))
-        .join()
-        .unwrap();
+    let default_string = String::from("default");
+    println!(
+        "{}",
+        Some(String::from("data")).unwrap_or_else(get_closure_with_string(default_string.clone()))
+    );
+    println!(
+        "{}",
+        None.unwrap_or_else(get_closure_with_string(default_string.clone()))
+    );
+    let default_i32 = 0;
+    println!(
+        "{}",
+        Some(5).unwrap_or_else(get_closure_with_i32(default_i32))
+    );
+    println!("{}", None.unwrap_or_else(get_closure_with_i32(default_i32)));
 }
