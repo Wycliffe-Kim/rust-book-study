@@ -8,28 +8,28 @@
  * Email: contact@nota.ai
  */
 
-fn get_closure_with_string(value: String) -> impl FnOnce() -> String {
-    move || value
-}
-
-fn get_closure_with_i32(value: i32) -> impl FnOnce() -> i32 {
-    move || value
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
 }
 
 fn main() {
-    let default_string = String::from("default");
-    println!(
-        "{}",
-        Some(String::from("data")).unwrap_or_else(get_closure_with_string(default_string.clone()))
-    );
-    println!(
-        "{}",
-        None.unwrap_or_else(get_closure_with_string(default_string.clone()))
-    );
-    let default_i32 = 0;
-    println!(
-        "{}",
-        Some(5).unwrap_or_else(get_closure_with_i32(default_i32))
-    );
-    println!("{}", None.unwrap_or_else(get_closure_with_i32(default_i32)));
+    let mut list = [
+        Rectangle {
+            width: 10,
+            height: 1,
+        },
+        Rectangle {
+            width: 3,
+            height: 5,
+        },
+        Rectangle {
+            width: 7,
+            height: 12,
+        },
+    ];
+
+    list.sort_by_key(|r| r.width); // FnMut이 호출. 이 클로저는 여러번 호출됨.
+    println!("{:#?}", list);
 }
