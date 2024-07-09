@@ -9,13 +9,16 @@
  */
 
 use std::sync::mpsc;
-use std::thread::{self, sleep};
+use std::thread;
 use std::time::Duration;
 
 fn main() {
+    // --생략--
+
     let (tx, rx) = mpsc::channel();
 
-    thread::spawn(move || {
+    let tx1 = tx.clone();
+    let handle1 = thread::spawn(move || {
         let vals = vec![
             String::from("hi"),
             String::from("from"),
@@ -23,11 +26,30 @@ fn main() {
             String::from("thread"),
         ];
 
-        vals.into_iter().for_each(|val| {
-            sleep(Duration::from_secs(1));
-            tx.send(val).unwrap()
-        });
+        for val in vals {
+            tx1.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
     });
 
-    rx.into_iter().for_each(|val| println!("Got: {}", val));
+    let handle2 = thread::spawn(move || {
+        let vals = vec![
+            String::from("more"),
+            String::from("messages"),
+            String::from("for"),
+            String::from("you"),
+        ];
+
+        for val in vals {
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    for received in rx {
+        println!("Got: {}", received);
+    }
+
+    handle1.join().unwrap();
+    handle2.join().unwrap();
 }
