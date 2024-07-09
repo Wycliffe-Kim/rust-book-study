@@ -9,20 +9,9 @@
  */
 
 fn main() {
-    let mut v1 = vec![1, 2, 3];
+    let v1: Vec<i32> = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    let mut v1_iter_mut = v1.iter_mut();
-    while let Some(value) = v1_iter_mut.next() {
-        println!("Got: {}", value);
-    }
+    let v2: Vec<i32> = v1.iter().filter(|x| *x % 2 == 0).map(|x| x * 2).collect();
 
-    let mut v1_iter = v1.iter();
-    while let Some(value) = v1_iter.next() {
-        println!("Got: {}", value);
-    }
-
-    let mut v1_iter_into = v1.into_iter();
-    while let Some(value) = v1_iter_into.next() {
-        println!("Got: {}", value);
-    }
+    println!("{:?}", v2);
 }
