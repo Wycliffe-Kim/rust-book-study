@@ -40,10 +40,15 @@ pub fn new(summary_type: SummaryType) -> Box<dyn Summary> {
     }
 }
 
-pub fn notify(item: &Box<dyn Summary>) {
+pub fn notify<T>(item: &T)
+where
+    T: ?Sized + Summary,
+{
     println!("Breaking news! {}", item.summarize());
 }
-
-pub fn notify2(item: &impl Summary) {
+pub fn notify2<T>(item: &T)
+where
+    T: Summary,
+{
     println!("[2] Breaking news! {}", item.summarize());
 }

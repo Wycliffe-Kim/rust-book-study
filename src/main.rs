@@ -18,8 +18,8 @@ fn main() {
     println!("news article: {}", news_article.summarize());
     println!("tweet: {}", tweet.summarize());
 
-    summary::notify(&news_article);
-    summary::notify(&tweet);
+    summary::notify(news_article.as_ref());
+    summary::notify(tweet.as_ref());
 
     summary::notify2(&news_article::NewsArticle {
         headline: String::from("Penguins win the Stanley Cup Championship!"),
