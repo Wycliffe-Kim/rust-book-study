@@ -8,32 +8,28 @@
  * Email: contact@nota.ai
  */
 
-#[derive(Debug)]
-struct Rectangle {
-    width: u32,
-    height: u32,
+fn get_closure_with_string(value: String) -> Box<dyn FnOnce() -> String> {
+    Box::new(|| value)
+}
+
+fn get_closure_with_i32(value: i32) -> impl FnOnce() -> i32 {
+    move || value
 }
 
 fn main() {
-    let mut list = [
-        Rectangle {
-            width: 10,
-            height: 1,
-        },
-        Rectangle {
-            width: 3,
-            height: 5,
-        },
-        Rectangle {
-            width: 7,
-            height: 12,
-        },
-    ];
-
-    let mut num_sort_operations = 0;
-    list.sort_by_key(|r| {
-        num_sort_operations += 1;
-        r.width
-    });
-    println!("{:#?}, sorted in {num_sort_operations} operations", list);
+    let default_string = String::from("default");
+    println!(
+        "{}",
+        Some(String::from("data")).unwrap_or_else(get_closure_with_string(default_string.clone()))
+    );
+    println!(
+        "{}",
+        None.unwrap_or_else(get_closure_with_string(default_string.clone()))
+    );
+    let default_i32 = 0;
+    println!(
+        "{}",
+        Some(5).unwrap_or_else(get_closure_with_i32(default_i32))
+    );
+    println!("{}", None.unwrap_or_else(get_closure_with_i32(default_i32)));
 }
