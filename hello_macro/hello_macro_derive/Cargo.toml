@@ -8,10 +8,13 @@
 # Email: contact@nota.ai
 #
 [package]
-name = "rust-book-study"
+name = "hello_macro_derive"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-hello_macro = { path = "hello_macro" }
-hello_macro_derive = { path = "hello_macro/hello_macro_derive" }
+syn = "1.0"
+quote = "1.0"
+
+[lib]
+proc-macro = true
