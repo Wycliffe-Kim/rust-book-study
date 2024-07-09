@@ -30,6 +30,12 @@ fn main() {
         },
     ];
 
-    list.sort_by_key(|r| r.width); // FnMut이 호출. 이 클로저는 여러번 호출됨.
+    let mut sort_operations = vec![];
+    let value = String::from("by key called");
+
+    list.sort_by_key(|r| {
+        sort_operations.push(value);
+        r.width
+    });
     println!("{:#?}", list);
 }
