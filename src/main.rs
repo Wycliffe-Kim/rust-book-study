@@ -8,14 +8,19 @@
  * Email: contact@nota.ai
  */
 
-use std::thread;
+use std::sync::mpsc;
+use std::thread::{self, sleep};
+use std::time::Duration;
 
 fn main() {
-    let v = vec![1, 2, 3];
+    let (tx, rx) = mpsc::channel();
 
-    let handle = thread::spawn(move || {
-        println!("Here's a vector: {:?}", v);
+    thread::spawn(move || {
+        let val = String::from("hi");
+        sleep(Duration::from_secs(1));
+        tx.send(val).unwrap();
     });
 
-    handle.join().unwrap();
+    let received = rx.recv().unwrap();
+    println!("Got: {}", received);
 }
