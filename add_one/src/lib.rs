@@ -8,9 +8,16 @@
  * Email: contact@nota.ai
  */
 
-use add_one::add_one;
+pub fn add_one(x: i32) -> i32 {
+    x + 1
+}
 
-fn main() {
-    let num = 1;
-    println!("Hello, world! {} plus one is {}", num, add_one(num));
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        assert_eq!(add_one(1), 2);
+    }
 }
