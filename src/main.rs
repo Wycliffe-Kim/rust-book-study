@@ -9,9 +9,25 @@
  */
 
 fn main() {
-    let v1: Vec<i32> = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let v1: Vec<i32> = Vec::from(arr);
+    let v_iter: Vec<i32> = v1.iter().filter(|x| *x % 2 == 0).map(|x| x * 2).collect();
+    let v_into_iter: Vec<i32> = v1
+        .into_iter()
+        .filter(|x| *x % 2 == 0)
+        .map(|x| x * 2)
+        .collect();
 
-    let v2: Vec<i32> = v1.iter().filter(|x| *x % 2 == 0).map(|x| x * 2).collect();
+    let mut v2 = Vec::from(arr);
+    v2.iter_mut()
+        // .filter(|x| **x % 2 == 0)
+        .for_each(|x| {
+            *x = *x * 2;
+        });
+    // .map(|x| *x * 2)
+    // .collect();
 
+    println!("{:?}", v_iter);
+    println!("{:?}", v_into_iter);
     println!("{:?}", v2);
 }
