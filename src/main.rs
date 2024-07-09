@@ -8,26 +8,53 @@
  * Email: contact@nota.ai
  */
 
-fn main() {
-    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    let v1: Vec<i32> = Vec::from(arr);
-    let v_iter: Vec<i32> = v1.iter().filter(|x| *x % 2 == 0).map(|x| x * 2).collect();
-    let v_into_iter: Vec<i32> = v1
-        .into_iter()
-        .filter(|x| *x % 2 == 0)
-        .map(|x| x * 2)
-        .collect();
-
-    let mut v2 = Vec::from(arr);
-    v2.iter_mut()
-        // .filter(|x| **x % 2 == 0)
-        .for_each(|x| {
-            *x = *x * 2;
-        });
-    // .map(|x| *x * 2)
-    // .collect();
-
-    println!("{:?}", v_iter);
-    println!("{:?}", v_into_iter);
-    println!("{:?}", v2);
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u32,
+    style: String,
 }
+
+fn shoes_in_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
+    shoes.into_iter().filter(|s| s.size == shoe_size).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn filters_by_size() {
+        let shoes = vec![
+            Shoe {
+                size: 10,
+                style: String::from("sneaker"),
+            },
+            Shoe {
+                size: 13,
+                style: String::from("sandal"),
+            },
+            Shoe {
+                size: 10,
+                style: String::from("boot"),
+            },
+        ];
+
+        let in_my_size = shoes_in_size(shoes, 10);
+
+        assert_eq!(
+            in_my_size,
+            vec![
+                Shoe {
+                    size: 10,
+                    style: String::from("sneaker")
+                },
+                Shoe {
+                    size: 10,
+                    style: String::from("boot")
+                },
+            ]
+        );
+    }
+}
+
+fn main() {}
